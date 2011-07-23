@@ -1,11 +1,15 @@
-A simple Open Graph Protocol parser for Yii
+A simple Open Graph Protocol parser and add Open Graph metadata to pages for Yii.
 
 ## Installation
 
-1. Extract the release file under protected/extensions.
+1. Extract the release file under <tt>protected/extensions</tt>.
 
 
 ## Basic Usage
+
+### Building page with Open Graph metadata
+
+### Parse Open Graph metadata from page
 
 ## Author
 
