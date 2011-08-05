@@ -5,13 +5,11 @@ A simple Open Graph Protocol parser and add Open Graph metadata to pages for Yii
 1. Extract the release file under <tt>protected/extensions</tt>.
 2. Add to your config file:
  * in import section:
-
 	...
 	'application.extensions.OpenGraph.*',
 	...
 
  * in components section:
-
 	...
 	'openGraphNode' => array(
 	    'class' => 'application.extensions.OpenGraph.phaOpenGraphNode'
