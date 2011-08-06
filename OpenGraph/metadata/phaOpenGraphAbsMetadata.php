@@ -3,7 +3,7 @@
  * Base class for each metadata types
  *
  */
-abstract class phaOpenGraphAbsMetadata {
+abstract class phaOpenGraphAbsMetadata extends CModel {
 
     /**
      * Define required property
@@ -24,7 +24,49 @@ abstract class phaOpenGraphAbsMetadata {
      *
      * @var array
      */
-    protected $_meta = array();
+    protected $_meta = array ();
+
+    /**
+     * Model Data
+     *
+     * @var array
+     */
+    protected $_data = array ();
+
+    /**
+     * Returns the validation rules for attributes.
+     *
+     * @return array
+     */
+    public function rules() {
+        $required = array();
+        $rules = array();
+        foreach ( $this->_meta as $key => $value ) {
+            if ( $value == self::IS_REQUIRED ) {
+                $required[] = $key;
+            }
+        }
+        if ( !empty( $required ) ) {
+            $rules = array(
+                array(
+                    implode(',', $required),
+                    'required',
+                    'Is Required Field'
+                )
+            );
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Returns the list of attribute names of the model.
+     *
+     * @return array list of attribute names.
+     */
+    public function attributeNames() {
+        return array_keys( $this->_meta );
+    }
 
     /**
      * Extended list of metadata properties
@@ -36,13 +78,13 @@ abstract class phaOpenGraphAbsMetadata {
      *
      * @return array Return extended list of metadata properties
      */
-    public function extend( $property, $isRequired = null ){
-        if (is_string($property)) {
-            $this->_meta[ $property ] = !is_null($isRequired) ? $isRequired : self::IS_OPTIONAL;
+    public function extend( $property, $isRequired = null ) {
+        if ( is_string( $property ) ) {
+            $this->_meta[ $property ] = !is_null( $isRequired ) ? $isRequired : self::IS_OPTIONAL;
         }
-        elseif (is_array($property)) {
-            foreach ( $property as $name) {
-                $this->extend($name);
+        elseif ( is_array( $property ) ) {
+            foreach ( $property as $name ) {
+                $this->extend( $name );
             }
         }
     }
